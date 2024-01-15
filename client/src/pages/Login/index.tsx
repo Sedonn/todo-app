@@ -1,9 +1,9 @@
-import { Form, Header, Segment } from "semantic-ui-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Form, Header, Segment } from 'semantic-ui-react';
+import { Link, useNavigate } from 'react-router-dom';
 
-import SiteLayout from "../../layouts/SiteLayout";
-import { loginUser } from "../../API/user";
-import { toast } from "react-toastify";
+import SiteLayout from '../../layouts/SiteLayout';
+import { loginUser } from '../../API/user';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,16 +15,16 @@ const Login = () => {
     try {
       const formData = new FormData(target);
       const token = await loginUser(
-        formData.get("login"),
-        formData.get("password")
+        formData.get('login'),
+        formData.get('password'),
       );
 
-      localStorage.setItem("token", token);
+      localStorage.setItem('token', token);
 
-      navigate("/todo");
+      navigate('/todo');
     } catch (error) {
       console.error(error);
-      toast.error(error?.response?.data?.error ?? "Ошибка авторизации");
+      toast.error(error?.response?.data?.error ?? 'Ошибка авторизации');
     }
   };
 
@@ -40,7 +40,7 @@ const Login = () => {
           </Form.Button>
         </Form>
         <p className="mt-2 text-center">
-          Нет аккаунта -{" "}
+          Нет аккаунта -{' '}
           <Link to="/register">
             <b>зарегистрироваться</b>
           </Link>
