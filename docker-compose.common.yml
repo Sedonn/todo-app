@@ -1,0 +1,20 @@
+version: '3'
+
+name: todo-app
+services:
+  todo-app-api:
+    image: todo-app-api
+    build:
+      context: api/
+    ports:
+      - 8080:8080
+    environment:
+      - JWT_TOKEN_SECRET=${JWT_TOKEN_SECRET:-123}
+      - PORT=8080
+
+  todo-app-client:
+    image: todo-app-client
+    build:
+      context: client/
+    depends_on:
+      - todo-app-api
