@@ -7,12 +7,12 @@ import TodoListItem from "./components/TodoListItem";
 import TodoListMenu from "./components/TodoListMenu";
 import { useNavigate } from "react-router-dom";
 import {
-  createTodo,
-  deleteTodo,
-  getTodos,
-  updateTodoCompletion,
-  updateTodoContent,
-} from "../../API/todo";
+  createTask,
+  deleteTask,
+  getTasks,
+  updateTaskCompletion,
+  updateTaskContent,
+} from "../../API/task";
 import { toast } from "react-toastify";
 
 /**
@@ -62,7 +62,7 @@ const Todo = () => {
 
   const onAddTodo = useCallback(async () => {
     try {
-      const newTodoData = await createTodo();
+      const newTodoData = await createTask();
 
       setTodoData((prevTodoData) => [
         { ...newTodoData, editableOnCreate: true },
@@ -77,7 +77,7 @@ const Todo = () => {
 
   const onCompleteChange = useCallback(async (updateId, checked) => {
     try {
-      await updateTodoCompletion(updateId, checked);
+      await updateTaskCompletion(updateId, checked);
 
       setTodoData((prevState) => {
         const prevTodoData = [...prevState];
@@ -100,7 +100,7 @@ const Todo = () => {
 
   const onContentChange = useCallback(async (updateId, content) => {
     try {
-      await updateTodoContent(updateId, content);
+      await updateTaskContent(updateId, content);
 
       setTodoData((prevState) => {
         const prevTodoData = [...prevState];
@@ -123,7 +123,7 @@ const Todo = () => {
 
   const onTodoDelete = useCallback(async (deleteId) => {
     try {
-      await deleteTodo(deleteId);
+      await deleteTask(deleteId);
       setTodoData((prevTodoData) =>
         prevTodoData.filter(({ id }) => id !== deleteId)
       );
@@ -145,7 +145,7 @@ const Todo = () => {
       return navigate("/");
     }
 
-    getTodos()
+    getTasks()
       .then(setTodoData)
       .catch(({ response }) =>
         toast.error(response?.data?.error ?? "Ошибка загрузки списка дел")

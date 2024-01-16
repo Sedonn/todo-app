@@ -1,15 +1,21 @@
 import axios from 'axios';
 
-import { API_URL } from '../config';
+import { APIService } from './APIService';
 
-export const loginUser = async (login, password) => {
-  const response = await axios.post(`${API_URL}/user/login`, { login, password });
+export const loginUser = async (login: string, password: string) => {
+  const { data } = await APIService.post<{ token: string }>('user/login', {
+    login,
+    password,
+  });
 
-  return response.data.token;
+  return data.token;
 };
 
-export const registerUser = async (login, password) => {
-  const response = await axios.post(`${API_URL}/user/register`, { login, password });
+export const registerUser = async (login: string, password: string) => {
+  const { data } = await axios.post<{ token: string }>('user/register', {
+    login,
+    password,
+  });
 
-  return response.data.token;
+  return data.token;
 };
