@@ -1,10 +1,12 @@
-import { PropsWithChildren } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { ToastContainer, Zoom, toast } from 'react-toastify';
 
-const SiteLayout = ({ children }: PropsWithChildren) => (
+const BaseLayout = () => (
   <div className="h-screen w-screen bg-main-background-color">
-    <div className="mx-auto my-0 flex w-4/5 justify-center">{children}</div>
+    <div className="mx-auto my-0 flex w-4/5 justify-center">
+      <Outlet />
+    </div>
     <ToastContainer
       autoClose={4000}
       transition={Zoom}
@@ -14,4 +16,4 @@ const SiteLayout = ({ children }: PropsWithChildren) => (
   </div>
 );
 
-export default SiteLayout;
+export default BaseLayout;

@@ -9,7 +9,7 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
-    extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
+    extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx'],
   },
   server: {
     host: '0.0.0.0',

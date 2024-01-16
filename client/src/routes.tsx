@@ -4,18 +4,30 @@ import Login from '@/pages/Login';
 import Todo from '@/pages/Todo';
 import Register from '@/pages/Register';
 
+import BaseLayout from '@/layouts/BaseLayout';
+import RequireAuthorization from '@/components/RequireAuthorization';
+
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Login />,
-  },
-  {
-    path: '/register',
-    element: <Register />,
-  },
-  {
-    path: '/todo',
-    element: <Todo />,
+    element: <BaseLayout />,
+    children: [
+      {
+        path: '/',
+        element: <Login />,
+      },
+      {
+        path: '/register',
+        element: <Register />,
+      },
+      {
+        path: '/todo',
+        element: (
+          <RequireAuthorization>
+            <Todo />
+          </RequireAuthorization>
+        ),
+      },
+    ],
   },
 ]);
 

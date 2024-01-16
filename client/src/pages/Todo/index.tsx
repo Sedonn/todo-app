@@ -1,19 +1,18 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { Divider, Header, List, Message, Segment } from "semantic-ui-react";
+import { Divider, Header, List, Message, Segment } from 'semantic-ui-react';
 
-import SiteLayout from "../../layouts/SiteLayout";
-import TodoListItem from "./components/TodoListItem";
-import TodoListMenu from "./components/TodoListMenu";
-import { useNavigate } from "react-router-dom";
+import TodoListItem from './components/TodoListItem';
+import TodoListMenu from './components/TodoListMenu';
+import { useNavigate } from 'react-router-dom';
 import {
   createTask,
   deleteTask,
   getTasks,
   updateTaskCompletion,
   updateTaskContent,
-} from "../../API/task";
-import { toast } from "react-toastify";
+} from '../../API/task';
+import { toast } from 'react-toastify';
 
 /**
  * @typedef {object} Todo
@@ -39,12 +38,12 @@ const Todo = () => {
 
   const onShowCompleted = (filter) =>
     setTodoDataGetter(() =>
-      filter ? completedTodoDataGetter : defaultTodoDataGetter
+      filter ? completedTodoDataGetter : defaultTodoDataGetter,
     );
 
   const onShowUncompleted = (filter) =>
     setTodoDataGetter(() =>
-      filter ? uncompletedTodoDataGetter : defaultTodoDataGetter
+      filter ? uncompletedTodoDataGetter : defaultTodoDataGetter,
     );
 
   const onSortByDate = (field, sort) => {
@@ -54,9 +53,9 @@ const Todo = () => {
     };
 
     setTodoDataGetter(() =>
-      sort !== "none"
+      sort !== 'none'
         ? (todoList) => [...todoList].sort(comparatorConfig[sort])
-        : defaultTodoDataGetter
+        : defaultTodoDataGetter,
     );
   };
 
@@ -70,7 +69,7 @@ const Todo = () => {
       ]);
     } catch (error) {
       toast.error(
-        error?.response?.data?.error ?? "Ошибка создания новой записи"
+        error?.response?.data?.error ?? 'Ошибка создания новой записи',
       );
     }
   }, []);
@@ -93,7 +92,7 @@ const Todo = () => {
       });
     } catch (error) {
       toast.error(
-        error?.response?.data?.error ?? "Ошибка обновления статуса записи"
+        error?.response?.data?.error ?? 'Ошибка обновления статуса записи',
       );
     }
   }, []);
@@ -116,7 +115,7 @@ const Todo = () => {
       });
     } catch (error) {
       toast.error(
-        error?.response?.data?.error ?? "Ошибка обновления содержания записи"
+        error?.response?.data?.error ?? 'Ошибка обновления содержания записи',
       );
     }
   }, []);
@@ -125,63 +124,61 @@ const Todo = () => {
     try {
       await deleteTask(deleteId);
       setTodoData((prevTodoData) =>
-        prevTodoData.filter(({ id }) => id !== deleteId)
+        prevTodoData.filter(({ id }) => id !== deleteId),
       );
     } catch (error) {
-      toast.error(error?.response?.data?.error ?? "Ошибка удаления записи");
+      toast.error(error?.response?.data?.error ?? 'Ошибка удаления записи');
     }
   }, []);
 
   const [todoDataGetter, setTodoDataGetter] = useState(
-    () => defaultTodoDataGetter
+    () => defaultTodoDataGetter,
   );
   const todoDataFormated = useMemo(
     () => todoDataGetter(todoData),
-    [todoData, todoDataGetter]
+    [todoData, todoDataGetter],
   );
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      return navigate("/");
+    if (!localStorage.getItem('token')) {
+      return navigate('/');
     }
 
     getTasks()
       .then(setTodoData)
       .catch(({ response }) =>
-        toast.error(response?.data?.error ?? "Ошибка загрузки списка дел")
+        toast.error(response?.data?.error ?? 'Ошибка загрузки списка дел'),
       );
   }, []);
 
   return (
-    <SiteLayout>
-      <Segment className="!mt-10 w-3/4">
-        <Header as="h2">Список дел</Header>
-        <Divider />
-        <TodoListMenu
-          onAddTodo={onAddTodo}
-          onShowCompleted={onShowCompleted}
-          onShowUncompleted={onShowUncompleted}
-          onSortByCreateDate={(sort) => onSortByDate("createDate", sort)}
-          onSortByCompleteDate={(sort) => onSortByDate("completeDate", sort)}
-        />
-        <Divider />
-        {todoDataFormated.length !== 0 ? (
-          <List relaxed className="max-h-[35rem] !overflow-y-auto">
-            {todoDataFormated.map((todo, index) => (
-              <TodoListItem
-                key={todo.id ?? index}
-                todo={todo}
-                onCompleteChange={onCompleteChange}
-                onContentChange={onContentChange}
-                onTodoDelete={onTodoDelete}
-              />
-            ))}
-          </List>
-        ) : (
-          <Message className="text-center">Список дел пуст</Message>
-        )}
-      </Segment>
-    </SiteLayout>
+    <Segment className="!mt-10 w-3/4">
+      <Header as="h2">Список дел</Header>
+      <Divider />
+      <TodoListMenu
+        onAddTodo={onAddTodo}
+        onShowCompleted={onShowCompleted}
+        onShowUncompleted={onShowUncompleted}
+        onSortByCreateDate={(sort) => onSortByDate('createDate', sort)}
+        onSortByCompleteDate={(sort) => onSortByDate('completeDate', sort)}
+      />
+      <Divider />
+      {todoDataFormated.length !== 0 ? (
+        <List relaxed className="max-h-[35rem] !overflow-y-auto">
+          {todoDataFormated.map((todo, index) => (
+            <TodoListItem
+              key={todo.id ?? index}
+              todo={todo}
+              onCompleteChange={onCompleteChange}
+              onContentChange={onContentChange}
+              onTodoDelete={onTodoDelete}
+            />
+          ))}
+        </List>
+      ) : (
+        <Message className="text-center">Список дел пуст</Message>
+      )}
+    </Segment>
   );
 };
 
