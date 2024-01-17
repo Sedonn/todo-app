@@ -1,32 +1,31 @@
 import { FormEvent, useContext } from 'react';
 import { Form, Header, Segment } from 'semantic-ui-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import { UserStoreContext } from '@/App';
-import { loginUser } from '@/API/user';
+import { showErrorMessage } from '@/helpers/error';
+import { loginUser } from '@/API/userAPI';
 import GenericFormData from '@/helpers/GenericFormData';
 
 const Login = () => {
   const userStore = useContext(UserStoreContext);
   const navigate = useNavigate();
 
-  const onSubmit = async ({ target }: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     try {
-      const { login, password } = new GenericFormData<TUserCredentials>(
-        target as HTMLFormElement,
+      const userCredentials = new GenericFormData<TUserCredentials>(
+        event.target as HTMLFormElement,
       ).toObject();
 
-      const token = await loginUser(login, password);
+      const token = await loginUser(userCredentials);
 
-      new FormData();
-
-      userStore.save(token, login);
+      userStore.save(token, userCredentials.login);
 
       navigate('/todo');
     } catch (error) {
-      console.error(error);
-      toast.error(error?.response?.data?.error ?? 'Ошибка авторизации');
+      showErrorMessage(error);
     }
   };
 

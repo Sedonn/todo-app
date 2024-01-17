@@ -11,7 +11,7 @@ import {
   getTasks,
   updateTaskCompletion,
   updateTaskContent,
-} from '../../API/task';
+} from '../../API/taskAPI';
 import { toast } from 'react-toastify';
 
 /**

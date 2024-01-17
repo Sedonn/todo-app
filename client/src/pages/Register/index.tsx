@@ -1,29 +1,34 @@
 import { Form, Header, Segment } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
-
 import { toast } from 'react-toastify';
-import { registerUser } from '../../API/user';
+
+import { FormEvent } from 'react';
+
+import { registerUser } from '@/API/userAPI';
+import GenericFormData from '@/helpers/GenericFormData';
+import { showErrorMessage } from '@/helpers/error';
 
 const Register = () => {
   const navigate = useNavigate();
 
-  /**
-   * @param {React.FormEvent<HTMLFormElement>} event
-   */
-  const onSubmit = async ({ target }) => {
-    try {
-      const formData = new FormData(target);
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-      if (formData.get('password') !== formData.get('cpassword')) {
-        return toast.error('Пароли не сопадают');
+    try {
+      const { login, password, confirmedPassword } =
+        new GenericFormData<TUserRegisterCredentials>(
+          event.target as HTMLFormElement,
+        ).toObject();
+
+      if (password !== confirmedPassword) {
+        return toast.error('Пароли не совпадают');
       }
 
-      await registerUser(formData.get('login'), formData.get('password'));
+      await registerUser({ login, password });
 
       navigate('/');
     } catch (error) {
-      console.error(error);
-      toast.error(error?.response?.data?.error ?? 'Ошибка авторизации');
+      showErrorMessage(error);
     }
   };
 
@@ -35,7 +40,7 @@ const Register = () => {
         <Form.Input type="password" name="password" label="Пароль" required />
         <Form.Input
           type="password"
-          name="cpassword"
+          name="confirmedPassword"
           label="Подтвердите пароль"
           required
         />
