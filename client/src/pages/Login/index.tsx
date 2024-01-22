@@ -23,7 +23,7 @@ const Login = () => {
 
       userStore.save(token, userCredentials.login);
 
-      navigate('/todo');
+      navigate('/task');
     } catch (error) {
       showErrorMessage(error);
     }

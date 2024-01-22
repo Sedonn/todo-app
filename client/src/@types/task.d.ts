@@ -4,5 +4,7 @@ type TTask = {
   completed: number;
   content: string;
   createDate: number;
-  completeDate: null | number;
+  completeDate: number;
 };
+
+type TTaskSortableKeys = keyof PickByType<TTask, number>;

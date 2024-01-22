@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import Login from '@/pages/Login';
-import Todo from '@/pages/Todo';
+import Task from '@/pages/Task';
 import Register from '@/pages/Register';
 
 import BaseLayout from '@/layouts/BaseLayout';
@@ -20,10 +20,10 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: '/todo',
+        path: '/task',
         element: (
           <RequireAuthorization>
-            <Todo />
+            <Task />
           </RequireAuthorization>
         ),
       },
