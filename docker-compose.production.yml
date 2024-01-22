@@ -2,6 +2,9 @@ version: '3'
 
 name: todo-app-production
 services:
+  todo-app-db:
+    container_name: todo-app-db
+
   todo-app-api:
     container_name: todo-app-api
     build:

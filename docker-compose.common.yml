@@ -2,6 +2,13 @@ version: '3'
 
 name: todo-app
 services:
+  todo-app-db:
+    image: postgres:16.1
+    environment:
+      POSTGRES_PASSWORD: test
+    ports:
+      - 5432:5432
+
   todo-app-api:
     image: todo-app-api
     build:
