@@ -2,12 +2,13 @@
   "name": "todo-app-backend",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
-  "description": "backend part of Todo app",
-  "main": "app.js",
+  "description": "Backend part of Todo app",
+  "main": "app.ts",
   "scripts": {
-    "dev": "nodemon app.js",
-    "start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -L app.ts",
+    "build": "tsc --project ./",
+    "lint": "eslint . --ext .ts"
   },
   "author": "Sedonn (https://github.com/Sedonn)",
   "bugs": {
@@ -15,15 +16,32 @@
   },
   "homepage": "https://github.com/Sedonn/todo-app#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "class-transformer": "^0.5.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
-    "sqlite": "^4.2.1",
-    "sqlite3": "^5.1.6"
+    "pg": "^8.11.3",
+    "reflect-metadata": "^0.2.1",
+    "typeorm": "^0.3.19"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/node": "^20.10.7",
+    "@types/passport-jwt": "^3.0.8",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
+    "eslint": "^8.21.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
   }
 }

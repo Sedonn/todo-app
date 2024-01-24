@@ -5,9 +5,11 @@ services:
   todo-app-db:
     image: postgres:16.1
     environment:
-      POSTGRES_PASSWORD: test
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - 5432:5432
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   todo-app-api:
     image: todo-app-api
@@ -16,8 +18,15 @@ services:
     ports:
       - 8080:8080
     environment:
+      - POSTGRES_HOST=todo-app-db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=todo-app
       - JWT_TOKEN_SECRET=${JWT_TOKEN_SECRET:-123}
       - PORT=8080
+    depends_on:
+      - todo-app-db
 
   todo-app-client:
     image: todo-app-client

@@ -1,7 +1,8 @@
 import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
 
-import { getUserByID } from '../Models/user.js';
-import { JWT_TOKEN_SECRET } from '../config.js';
+import AppDataSource from '../data-source';
+import User from '../Models/User';
+import { JWT_TOKEN_SECRET } from '../config';
 
 const strategyOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -9,13 +10,13 @@ const strategyOptions = {
 };
 
 const todoAppJWTStrategy = new JWTStrategy(strategyOptions, async ({ id }, done) => {
-  const user = await getUserByID(id);
+  const userRepository = AppDataSource.getRepository(User);
 
-  if (!user) {
+  if (!(await userRepository.existsBy({ id }))) {
     return done(new Error('Ошибка аутентификации'), undefined);
   }
 
-  return done(null, { id: user.id });
+  return done(null, { id });
 });
 
 export default todoAppJWTStrategy;

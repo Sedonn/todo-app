@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "rootDir": "./",
+    "outDir": "./build",
+    "esModuleInterop": true,
+    "strict": true,
+    "typeRoots": [
+      "./@types",
+      "./node_modules/@types"
+    ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
+  }
+}

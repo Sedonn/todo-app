@@ -1,0 +1,1 @@
+CREATE DATABASE "todo-app" WITH TEMPLATE template0;
