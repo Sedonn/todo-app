@@ -22,9 +22,9 @@ export const getTasks: RequestHandler = async (
   try {
     const tasks = await taskRepository.findBy({ user: user!.id });
 
-    res.json(tasks);
+    return res.json(tasks);
   } catch (error) {
-    next(new APIError(500, 'Ошибка получения списка задач', error));
+    return next(new APIError(500, 'Ошибка получения списка задач', error));
   }
 };
 

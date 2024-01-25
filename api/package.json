@@ -26,7 +26,8 @@
     "passport-jwt": "^4.0.1",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.2.1",
-    "typeorm": "^0.3.19"
+    "typeorm": "^0.3.19",
+    "yn": "^5.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

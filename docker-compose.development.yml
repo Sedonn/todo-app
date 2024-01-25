@@ -13,6 +13,8 @@ services:
     environment:
       - NODE_ENV=development
       - CORS_ALLOW_ORIGINS=http://localhost:8001
+      - TYPEORM_LOG=true
+      - TYPEORM_MODELS_SYNC=true
     volumes:
       - ./api:/app/
       - /app/node_modules

@@ -8,6 +8,8 @@ declare global {
       POSTGRES_USER: string;
       POSTGRES_PASSWORD: string;
       POSTGRES_DATABASE: string;
+      TYPEORM_LOG: string;
+      TYPEORM_MODELS_SYNC: string;
       PORT: string;
       JWT_TOKEN_SECRET: string;
       CORS_ALLOW_ORIGINS: string;
