@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "description": "Backend part of Todo app",
   "main": "app.ts",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -L app.ts",
+    "dev": "nodemon -x tsx -L src/app.ts",
     "build": "tsc --project ./",
     "lint": "eslint . --ext .ts"
   },
@@ -34,14 +35,14 @@
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^20.10.7",
     "@types/passport-jwt": "^3.0.8",
-    "@typescript-eslint/eslint-plugin": "^5.33.0",
-    "@typescript-eslint/parser": "^5.33.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
     "eslint": "^8.21.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "nodemon": "^3.0.2",
-    "ts-node": "^10.7.0",
-    "typescript": "^4.6.2"
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.2"
   }
 }

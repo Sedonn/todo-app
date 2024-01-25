@@ -2,19 +2,19 @@
 
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import Task from './Task';
+import Task from './Task.ts';
 
-import { TUser } from '../@types/user';
+import type { TUser } from '@/@types/user.d.ts';
 
 @Entity()
 export default class User implements TUser {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column('varchar')
   login!: string;
 
-  @Column()
+  @Column('varchar')
   password!: string;
 
   @OneToMany(() => Task, (task: Task) => task.user)

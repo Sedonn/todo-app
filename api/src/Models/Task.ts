@@ -10,9 +10,9 @@ import {
 } from 'typeorm';
 import { Exclude, instanceToPlain } from 'class-transformer';
 
-import User from './User';
+import User from './User.ts';
 
-import { TTask } from '../@types/task';
+import type { TTask } from '@/@types/task.d.ts';
 
 @Entity()
 export default class Task implements TTask {

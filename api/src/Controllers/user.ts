@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import { NextFunction, Request, RequestHandler, Response } from 'express';
+import type { NextFunction, Request, RequestHandler, Response } from 'express';
 
-import AppDataSource from '../data-source';
-import User from '../Models/User';
-import APIError from '../utils/APIError';
-import { JWT_TOKEN_SECRET } from '../config';
+import AppDataSource from '@/data-source.ts';
+import User from '@/Models/User.ts';
+import APIError from '@/utils/APIError.ts';
+import { JWT_TOKEN_SECRET } from '@/config.ts';
 
-import { TUser } from '../@types/user';
+import type { TUser } from '@/@types/user.d.ts';
 
 type RegisterUserRequest = Request<object, object, TUser>;
 

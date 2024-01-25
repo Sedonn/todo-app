@@ -1,8 +1,10 @@
-import passport from 'passport';
-import { Router } from 'express';
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 
-import userRouter from './user';
-import taskRouter from './task';
+import { Router } from 'express';
+import passport from 'passport';
+
+import userRouter from './user.ts';
+import taskRouter from './task.ts';
 
 const router = Router();
 

@@ -1,10 +1,10 @@
-import { NextFunction, Request, RequestHandler, Response } from 'express';
+import type { NextFunction, Request, RequestHandler, Response } from 'express';
 
-import AppDataSource from '../data-source';
-import Task from '../Models/Task';
-import APIError from '../utils/APIError';
+import AppDataSource from '@/data-source.ts';
+import Task from '@/Models/Task.ts';
+import APIError from '@/utils/APIError.ts';
 
-import { TTask, TTaskResponseBody } from '../@types/task';
+import type { TTask, TTaskResponseBody } from '@/@types/task.d.ts';
 
 /**
  * Get all current user tasks.
@@ -20,11 +20,11 @@ export const getTasks: RequestHandler = async (
   const taskRepository = AppDataSource.getRepository(Task);
 
   try {
-    const tasks = await taskRepository.findBy({ user: user?.id });
+    const tasks = await taskRepository.findBy({ user: user!.id });
 
-    return res.json(tasks);
+    res.json(tasks);
   } catch (error) {
-    return next(new APIError(500, 'Ошибка получения списка задач', error));
+    next(new APIError(500, 'Ошибка получения списка задач', error));
   }
 };
 
@@ -49,7 +49,7 @@ export const createTask: RequestHandler = async (
   try {
     const task = await taskRepository.save(
       taskRepository.create({
-        user: user?.id,
+        user: user!.id,
         content,
       }),
     );
@@ -78,7 +78,7 @@ export const updateTask: RequestHandler = async (
   const { id, completeDate, content } = body;
   const taskRepository = AppDataSource.getRepository(Task);
 
-  const task = await taskRepository.findOneBy({ id, user: user?.id });
+  const task = await taskRepository.findOneBy({ id, user: user!.id });
   if (!task) {
     return next(new APIError(500, 'Задача не существует'));
   }
@@ -111,7 +111,7 @@ export const deleteTask: RequestHandler = async (
   const { id } = body;
   const taskRepository = AppDataSource.getRepository(Task);
 
-  const task = await taskRepository.findOneBy({ id, user: user?.id });
+  const task = await taskRepository.findOneBy({ id, user: user!.id });
   if (!task) {
     return next(new APIError(500, 'Задача не существует'));
   }

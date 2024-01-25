@@ -1,8 +1,8 @@
 import { DataSource } from 'typeorm';
 
-import Task from './Models/Task';
-import User from './Models/User';
-import { POSTGRES_DATABASE, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_USER } from './config';
+import Task from '@/Models/Task.ts';
+import User from '@/Models/User.ts';
+import { POSTGRES_DATABASE, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_USER } from '@/config.ts';
 
 const AppDataSource = new DataSource({
   type: 'postgres',
