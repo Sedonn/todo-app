@@ -1,4 +1,4 @@
-class APIError extends Error {
+export class APIError extends Error {
   /** Http error code. */
   public readonly httpCode: number;
 
@@ -12,5 +12,3 @@ class APIError extends Error {
     this.errorInstance = errorInstance;
   }
 }
-
-export default APIError;

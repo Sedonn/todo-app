@@ -5,13 +5,13 @@ import express from 'express';
 import cors from 'cors';
 import passport from 'passport';
 
-import routes from '@/Routes/index.ts';
+import { mainRouter } from '@/Routes/index.ts';
 
 import { CORS_ALLOW_ORIGINS, PORT } from '@/config.ts';
-import todoAppJWTStrategy from '@/Middleware/authentication.ts';
+import { todoAppJWTStrategy } from '@/Middleware/authentication.ts';
 
-import AppDataSource from '@/data-source.ts';
-import globalErrorHandler from '@/Middleware/error.ts';
+import { AppDataSource } from '@/data-source.ts';
+import { globalErrorHandler } from '@/Middleware/error.ts';
 
 passport.use(todoAppJWTStrategy);
 
@@ -27,7 +27,7 @@ app.use(
   }),
 );
 
-app.use('/api', routes);
+app.use('/api', mainRouter);
 app.use(globalErrorHandler);
 
 try {

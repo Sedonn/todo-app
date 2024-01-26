@@ -3,12 +3,12 @@
 
 import type { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 
-import APIError from '@/utils/APIError.ts';
+import { APIError } from '@/utils/APIError.ts';
 
 import type { TErrorResponse } from '@/@types/error.d.ts';
 
 /** Middleware which sending all API errors to the client. */
-const globalErrorHandler: ErrorRequestHandler = async (
+export const globalErrorHandler: ErrorRequestHandler = async (
   error: Error | APIError,
   req: Request<object, TErrorResponse>,
   res: Response<TErrorResponse>,
@@ -22,5 +22,3 @@ const globalErrorHandler: ErrorRequestHandler = async (
 
   return res.status(500).json({ error: 'Неизвестная ошибка' });
 };
-
-export default globalErrorHandler;

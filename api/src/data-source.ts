@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
 
-import Task from '@/Models/Task.ts';
-import User from '@/Models/User.ts';
+import { Task } from '@/Models/Task.ts';
+import { User } from '@/Models/User.ts';
 import {
   POSTGRES_DATABASE,
   POSTGRES_HOST,
@@ -12,7 +12,7 @@ import {
   TYPEORM_MODELS_SYNC,
 } from '@/config.ts';
 
-const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource({
   type: 'postgres',
   host: POSTGRES_HOST,
   port: POSTGRES_PORT,
@@ -25,5 +25,3 @@ const AppDataSource = new DataSource({
   subscribers: [],
   migrations: [],
 });
-
-export default AppDataSource;

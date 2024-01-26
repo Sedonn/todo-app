@@ -17,7 +17,7 @@ module.exports = {
     project: true,
     tsconfigRootDir: __dirname,
   },
-  ignorePatterns: ['.eslintrc.cjs'],
+  ignorePatterns: ['.eslintrc.cjs', 'dist/'],
   rules: {
     'linebreak-style': ['error', 'windows'],
     'import/extensions': ['error', 'always'],
@@ -33,6 +33,14 @@ module.exports = {
       'error',
       {
         checksVoidReturn: false,
+      },
+    ],
+    'import/prefer-default-export': 'off',
+    'import/no-default-export': 'error',
+    'max-len': [
+      'error',
+      {
+        code: 120,
       },
     ],
   },

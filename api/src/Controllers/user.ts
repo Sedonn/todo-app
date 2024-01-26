@@ -4,9 +4,9 @@ import jwt from 'jsonwebtoken';
 
 import type { NextFunction, Request, RequestHandler, Response } from 'express';
 
-import AppDataSource from '@/data-source.ts';
-import User from '@/Models/User.ts';
-import APIError from '@/utils/APIError.ts';
+import { AppDataSource } from '@/data-source.ts';
+import { User } from '@/Models/User.ts';
+import { APIError } from '@/utils/APIError.ts';
 import { JWT_TOKEN_SECRET } from '@/config.ts';
 
 import type { TUser } from '@/@types/user.d.ts';

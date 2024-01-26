@@ -1,7 +1,7 @@
 import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
 
-import AppDataSource from '@/data-source.ts';
-import User from '@/Models/User.ts';
+import { AppDataSource } from '@/data-source.ts';
+import { User } from '@/Models/User.ts';
 import { JWT_TOKEN_SECRET } from '@/config.ts';
 
 const strategyOptions = {
@@ -9,7 +9,7 @@ const strategyOptions = {
   secretOrKey: JWT_TOKEN_SECRET,
 };
 
-const todoAppJWTStrategy = new JWTStrategy(strategyOptions, async ({ id }: Express.User, done) => {
+export const todoAppJWTStrategy = new JWTStrategy(strategyOptions, async ({ id }: Express.User, done) => {
   const userRepository = AppDataSource.getRepository(User);
 
   if (!(await userRepository.existsBy({ id }))) {
@@ -18,5 +18,3 @@ const todoAppJWTStrategy = new JWTStrategy(strategyOptions, async ({ id }: Expre
 
   return done(null, { id });
 });
-
-export default todoAppJWTStrategy;

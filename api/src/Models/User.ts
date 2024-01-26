@@ -2,12 +2,12 @@
 
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import Task from './Task.ts';
+import { Task } from './Task.ts';
 
 import type { TUser } from '@/@types/user.d.ts';
 
 @Entity()
-export default class User implements TUser {
+export class User implements TUser {
   @PrimaryGeneratedColumn()
   id!: number;
 

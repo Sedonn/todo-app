@@ -12,6 +12,7 @@ services:
     environment:
       - NODE_ENV=production
       - CORS_ALLOW_ORIGINS=http://localhost:8081
+      - TYPEORM_MODELS_SYNC=true
 
   todo-app-client:
     container_name: todo-app-client

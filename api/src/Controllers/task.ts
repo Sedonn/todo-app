@@ -1,8 +1,8 @@
 import type { NextFunction, Request, RequestHandler, Response } from 'express';
 
-import AppDataSource from '@/data-source.ts';
-import Task from '@/Models/Task.ts';
-import APIError from '@/utils/APIError.ts';
+import { AppDataSource } from '@/data-source.ts';
+import { Task } from '@/Models/Task.ts';
+import { APIError } from '@/utils/APIError.ts';
 
 import type { TTask, TTaskResponseBody } from '@/@types/task.d.ts';
 

@@ -10,12 +10,12 @@ import {
 } from 'typeorm';
 import { Exclude, instanceToPlain } from 'class-transformer';
 
-import User from './User.ts';
+import { User } from './User.ts';
 
 import type { TTask } from '@/@types/task.d.ts';
 
 @Entity()
-export default class Task implements TTask {
+export class Task implements TTask {
   @PrimaryGeneratedColumn()
   id!: number;
 
