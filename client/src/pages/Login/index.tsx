@@ -30,7 +30,7 @@ const Login = () => {
   };
 
   return (
-    <Segment className="!mt-40 w-96">
+    <Segment className="!mt-40 w-96 h-fit">
       <Header as="h2">Вход</Header>
       <Form onSubmit={onSubmit}>
         <Form.Input name="login" label="Логин" required />

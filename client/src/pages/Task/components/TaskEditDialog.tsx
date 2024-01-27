@@ -61,6 +61,7 @@ const TaskEditDialog = forwardRef<
 
   const openAndCreateTask = () => {
     setTask(null);
+    setTaskContent('');
     setEditMode('create');
     dialogRef.current?.open();
   };

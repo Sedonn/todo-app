@@ -31,7 +31,7 @@ const TaskListMenu = ({
   };
 
   return (
-    <Button.Group>
+    <Button.Group className="flex-wrap">
       <Button onClick={onCreateTask} icon="add" color="green" />
       <SortButton<TTaskSortableKeys>
         title="Дата создания"

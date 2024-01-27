@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { Divider, Header, List, Message, Segment } from 'semantic-ui-react';
+import { List, Message, Segment } from 'semantic-ui-react';
 
-import TaskListItem from './components/TaskListItem';
+import TaskListHeader from './components/TaskListHeader';
 import TaskListMenu, { TTaskStatusFilterType } from './components/TaskListMenu';
+import TaskListItem from './components/TaskListItem';
 import TaskEditDialog, {
   TTaskEditDialogRefAttributes,
 } from './components/TaskEditDialog';
@@ -111,33 +112,35 @@ const Task = () => {
         onTaskUpdated={onTaskUpdated}
       />
 
-      <Segment className="!mt-10 w-full">
-        <Header as="h2">Список дел</Header>
-        <Divider />
-        <TaskListMenu
-          onCreateTask={() => taskEditDialog.current?.openAndCreateTask()}
-          onFilterByStatusType={onFilterByStatusType}
-          onSortByDate={onSortByDate}
-        />
-        <Divider />
-        {tasksFilteredAndSorted.length !== 0 ? (
-          <List relaxed className="max-h-[35rem] !overflow-y-auto">
-            {tasksFilteredAndSorted.map((task: TTask) => (
-              <TaskListItem
-                key={task.id}
-                task={task}
-                onTaskEdit={(task: TTask) =>
-                  taskEditDialog.current?.openAndEditTask(task)
-                }
-                onTaskUpdated={onTaskUpdated}
-                onTaskDeleted={onTaskDeleted}
-              />
-            ))}
-          </List>
-        ) : (
-          <Message className="text-center">Список дел пуст</Message>
-        )}
-      </Segment>
+      <Segment.Group className="flex h-full w-full">
+        <Segment className="flex-initial">
+          <TaskListHeader />
+          <TaskListMenu
+            onCreateTask={() => taskEditDialog.current?.openAndCreateTask()}
+            onFilterByStatusType={onFilterByStatusType}
+            onSortByDate={onSortByDate}
+          />
+        </Segment>
+        <Segment className="flex-auto !overflow-y-auto">
+          {tasksFilteredAndSorted.length !== 0 ? (
+            <List relaxed>
+              {tasksFilteredAndSorted.map((task: TTask) => (
+                <TaskListItem
+                  key={task.id}
+                  task={task}
+                  onTaskEdit={(task: TTask) =>
+                    taskEditDialog.current?.openAndEditTask(task)
+                  }
+                  onTaskUpdated={onTaskUpdated}
+                  onTaskDeleted={onTaskDeleted}
+                />
+              ))}
+            </List>
+          ) : (
+            <Message className="text-center">Список дел пуст</Message>
+          )}
+        </Segment>
+      </Segment.Group>
     </>
   );
 };
