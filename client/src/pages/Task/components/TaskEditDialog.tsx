@@ -23,8 +23,10 @@ import ControllableDialog, {
   ControllableDialogRefAttributes,
 } from '@/components/ControllableDialog';
 
-import { createTask, updateTaskContent } from '@/API/taskAPI';
+import { createTask, updateTask } from '@/API/taskAPI';
 import { showErrorMessage } from '@/helpers/error';
+
+import { TTask } from '@/@types/task';
 
 type TEditMode = 'create' | 'update';
 
@@ -77,12 +79,11 @@ const TaskEditDialog = forwardRef<
 
   const onCreateTask = async () => {
     try {
-      const newTaskData = await createTask();
-      await updateTaskContent(newTaskData.id, taskContent);
+      const createdTask = await createTask(taskContent);
 
       dialogRef.current?.close();
       toast.success('Новая задача добавлена');
-      onTaskCreated({ ...newTaskData, content: taskContent });
+      onTaskCreated(createdTask);
     } catch (error) {
       showErrorMessage(error);
     }
@@ -90,11 +91,11 @@ const TaskEditDialog = forwardRef<
 
   const onUpdateTask = async () => {
     try {
-      await updateTaskContent(task!.id, taskContent);
+      const updatedTask = await updateTask({ ...task!, content: taskContent });
 
       dialogRef.current?.close();
       toast.success('Изменения сохранены');
-      onTaskUpdated({ ...task!, content: taskContent });
+      onTaskUpdated(updatedTask);
     } catch (error) {
       showErrorMessage(error);
     }

@@ -12,5 +12,5 @@ export const loginUser = async (userCredentials: TUserCredentials) => {
 
 /** Register the new user. */
 export const registerUser = async (userCredentials: TUserCredentials) => {
-  await APIService.post<{ token: string }>('user/register', userCredentials);
+  await APIService.post('user/register', userCredentials);
 };

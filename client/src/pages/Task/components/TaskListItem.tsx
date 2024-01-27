@@ -11,8 +11,10 @@ import {
   Segment,
 } from 'semantic-ui-react';
 
-import { deleteTask, updateTaskCompletion } from '@/API/taskAPI';
+import { deleteTask, updateTask } from '@/API/taskAPI';
 import { showErrorMessage } from '@/helpers/error';
+
+import { TTask } from '@/@types/task';
 
 type TTaskListItemProps = {
   task: TTask;
@@ -36,13 +38,12 @@ const TaskListItem = ({
     { checked }: CheckboxProps,
   ) => {
     try {
-      await updateTaskCompletion(task.id, Number(checked));
-
-      onTaskUpdated({
-        ...task!,
-        completed: Number(checked),
-        completeDate: Number(checked ? new Date() : null),
+      const updatedTask = await updateTask({
+        ...task,
+        completeDate: checked ? new Date() : null,
       });
+
+      onTaskUpdated(updatedTask);
     } catch (error) {
       showErrorMessage(error);
     }
@@ -50,7 +51,7 @@ const TaskListItem = ({
 
   const onTaskDelete = async () => {
     try {
-      await deleteTask(task.id);
+      await deleteTask(task);
       onTaskDeleted(task);
     } catch (error) {
       showErrorMessage(error);
@@ -62,28 +63,37 @@ const TaskListItem = ({
       <List.Content>
         <Segment className="!text-xl">
           <List.Header className="!flex justify-between !text-base">
-            {!!task.completed && (
+            {task.completeDate && (
               <>
                 <Label icon="check" color="green" content="Выполнено" />
 
                 <Label
                   icon="calendar check"
                   color="blue"
-                  content={new Date(task.completeDate).toLocaleString()}
+                  content={task.completeDate.toLocaleString()}
                 />
               </>
             )}
-            <Label
-              className="!ml-auto"
-              icon="calendar plus"
-              color="teal"
-              content={new Date(task.createDate).toLocaleString()}
-            />
+            <div className="!ml-auto">
+              {Number(task.createDate) !== Number(task.updateDate) && (
+                <Label
+                  icon="edit"
+                  color="yellow"
+                  content={task.updateDate.toLocaleString()}
+                />
+              )}
+
+              <Label
+                icon="calendar plus"
+                color="teal"
+                content={task.createDate.toLocaleString()}
+              />
+            </div>
           </List.Header>
           <div className="mt-1 flex items-center justify-between">
             <div className="flex w-full items-center">
               <Checkbox
-                checked={!!task.completed}
+                checked={!!task.completeDate}
                 onChange={onCompleteChange}
               />
 

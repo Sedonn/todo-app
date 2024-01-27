@@ -6,6 +6,8 @@ import { Button, Icon } from 'semantic-ui-react';
 
 import SortButton, { TSortButtonProps } from '@/components/SortButton';
 
+import { TTaskSortableKeys } from '@/@types/task';
+
 export type TTaskStatusFilterType = 'completed' | 'uncompleted' | 'all';
 
 type TTaskListMenuProps = {

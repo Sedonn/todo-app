@@ -15,6 +15,8 @@ import { TSortType } from '@/components/SortButton';
 import { getTasks } from '@/API/taskAPI';
 import { showErrorMessage } from '@/helpers/error';
 
+import { TTask, TTaskSortableKeys } from '@/@types/task';
+
 type TTaskFilterFunction = (task: TTask) => boolean;
 
 type TTaskSortFunction = (first: TTask, second: TTask) => number;
@@ -26,8 +28,10 @@ type TTaskSortFunction = (first: TTask, second: TTask) => number;
  */
 const createTaskSortFunction = (field: TTaskSortableKeys, sort: TSortType) => {
   const comparatorConfig = {
-    asc: (first: TTask, second: TTask) => first[field] - second[field],
-    desc: (first: TTask, second: TTask) => second[field] - first[field],
+    asc: (first: TTask, second: TTask) =>
+      Number(first[field]) - Number(second[field]),
+    desc: (first: TTask, second: TTask) =>
+      Number(second[field]) - Number(first[field]),
     none: () => 0,
   } satisfies Record<TSortType, TTaskSortFunction>;
 
@@ -44,12 +48,13 @@ const showAllTasks: TTaskFilterFunction = (task: TTask) => !!task;
  * Function for {@link Array.filter} that shows only completed tasks.
  * @param task
  */
-const showOnlyCompletedTasks: TTaskFilterFunction = ({ completed }: TTask) =>
-  !!completed;
+const showOnlyCompletedTasks: TTaskFilterFunction = ({ completeDate }: TTask) =>
+  !!completeDate;
 
 /** Function for {@link Array.filter} that shows only uncompleted tasks. */
-const showOnlyUncompletedTasks: TTaskFilterFunction = ({ completed }: TTask) =>
-  !completed;
+const showOnlyUncompletedTasks: TTaskFilterFunction = ({
+  completeDate,
+}: TTask) => !completeDate;
 
 /** Manage of the user tasks. */
 const Task = () => {
@@ -81,11 +86,8 @@ const Task = () => {
   const onSortByDate = (sortKey: TTaskSortableKeys, sortType: TSortType) =>
     setTasksSortFunction(() => createTaskSortFunction(sortKey, sortType));
 
-  const onTaskCreated = (task: TTask) =>
-    setTasks((prevState) => [
-      ...prevState,
-      { ...task, editableOnCreate: true },
-    ]);
+  const onTaskCreated = (createdTask: TTask) =>
+    setTasks((prevState) => [...prevState, createdTask]);
 
   const onTaskUpdated = (updatedTask: TTask) =>
     setTasks((prevState) =>

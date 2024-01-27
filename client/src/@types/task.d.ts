@@ -1,10 +1,22 @@
+import { AxiosResponse } from 'axios';
+
+/** The base task type. */
 type TTask = {
   id: number;
-  userId: number;
-  completed: number;
   content: string;
-  createDate: number;
-  completeDate: number;
+  createDate: Date;
+  updateDate: Date;
+  completeDate: Date | null;
 };
 
-type TTaskSortableKeys = keyof PickByType<TTask, number>;
+/** The task data received from API. */
+type TTaskRaw = TTask & {
+  content: string;
+  createDate: string;
+  updateDate: string;
+  completeDate: string | null;
+};
+
+type TTaskRawResponse = AxiosResponse<TTaskRaw>;
+
+type TTaskSortableKeys = keyof PickByType<TTask, number | (Date | null)>;
