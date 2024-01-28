@@ -7,6 +7,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  type Relation,
 } from 'typeorm';
 import { Exclude, instanceToPlain } from 'class-transformer';
 
@@ -21,7 +22,7 @@ export class Task implements TTask {
 
   @Exclude({ toPlainOnly: true })
   @ManyToOne(() => User, (user: User) => user.tasks, { nullable: false })
-  user!: number;
+  user!: Relation<User>;
 
   @Column('text', { default: '' })
   content!: string;

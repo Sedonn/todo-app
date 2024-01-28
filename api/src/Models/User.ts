@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/indent */
 
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, type Relation } from 'typeorm';
 
 import { Task } from './Task.ts';
 
@@ -18,5 +18,5 @@ export class User implements TUser {
   password!: string;
 
   @OneToMany(() => Task, (task: Task) => task.user)
-  tasks!: Task[];
+  tasks!: Relation<Task[]>;
 }

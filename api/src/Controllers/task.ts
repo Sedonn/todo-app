@@ -4,7 +4,7 @@ import { AppDataSource } from '@/data-source.ts';
 import { Task } from '@/Models/Task.ts';
 import { APIError } from '@/utils/APIError.ts';
 
-import type { TTask, TTaskResponseBody } from '@/@types/task.d.ts';
+import type { TTask } from '@/@types/task.d.ts';
 
 /**
  * Get all current user tasks.
@@ -14,13 +14,13 @@ import type { TTask, TTaskResponseBody } from '@/@types/task.d.ts';
  */
 export const getTasks: RequestHandler = async (
   { user }: Request,
-  res: Response<TTaskResponseBody[]>,
+  res: Response<TTask[]>,
   next: NextFunction,
 ) => {
   const taskRepository = AppDataSource.getRepository(Task);
 
   try {
-    const tasks = await taskRepository.findBy({ user: user!.id });
+    const tasks = await taskRepository.find({ where: { user: { id: user!.id } } });
 
     return res.json(tasks);
   } catch (error) {
@@ -40,7 +40,7 @@ type CreateTaskRequest = Request<object, object, CreateTaskRequestBody>;
  */
 export const createTask: RequestHandler = async (
   { user, body }: CreateTaskRequest,
-  res: Response<TTaskResponseBody>,
+  res: Response<TTask>,
   next: NextFunction,
 ) => {
   const taskRepository = AppDataSource.getRepository(Task);
@@ -49,7 +49,7 @@ export const createTask: RequestHandler = async (
   try {
     const task = await taskRepository.save(
       taskRepository.create({
-        user: user!.id,
+        user: { id: user!.id },
         content,
       }),
     );
@@ -72,13 +72,13 @@ type UpdateTaskRequest = Request<object, object, UpdateTaskRequestBody>;
  */
 export const updateTask: RequestHandler = async (
   { user, body }: UpdateTaskRequest,
-  res: Response<TTaskResponseBody>,
+  res: Response<TTask>,
   next: NextFunction,
 ) => {
-  const { id, completeDate, content } = body;
   const taskRepository = AppDataSource.getRepository(Task);
+  const { id, completeDate, content } = body;
 
-  const task = await taskRepository.findOneBy({ id, user: user!.id });
+  const task = await taskRepository.findOne({ where: { id, user: { id: user!.id } } });
   if (!task) {
     return next(new APIError(500, 'Задача не существует'));
   }
@@ -105,13 +105,13 @@ type DeleteTaskRequest = Request<object, object, DeleteTaskRequestBody>;
  */
 export const deleteTask: RequestHandler = async (
   { user, body }: DeleteTaskRequest,
-  res: Response<TTaskResponseBody>,
+  res: Response<TTask>,
   next: NextFunction,
 ) => {
-  const { id } = body;
   const taskRepository = AppDataSource.getRepository(Task);
+  const { id } = body;
 
-  const task = await taskRepository.findOneBy({ id, user: user!.id });
+  const task = await taskRepository.findOne({ where: { id, user: { id: user!.id } } });
   if (!task) {
     return next(new APIError(500, 'Задача не существует'));
   }
