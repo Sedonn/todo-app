@@ -1,3 +1,6 @@
+/** @fileoverview Wrapper for {@link FormData} for adding of the generics support. */
+
+/** Wrapper for {@link FormData} for adding of the generics support. */
 class GenericFormData<T = object> extends FormData {
   constructor(
     form?: HTMLFormElement | undefined,

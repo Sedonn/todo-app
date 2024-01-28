@@ -1,4 +1,7 @@
+/** @fileoverview Controllers for the operations with users. */
+
 /* eslint-disable @typescript-eslint/no-misused-promises */
+
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 

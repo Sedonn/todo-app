@@ -1,3 +1,5 @@
+/** @fileoverview Task list header. */
+
 import { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 
@@ -5,6 +7,7 @@ import { Button, Header, Icon } from 'semantic-ui-react';
 
 import { UserStoreContext } from '@/App';
 
+/** Task list header. */
 const TaskListHeader = observer(() => {
   const userStore = useContext(UserStoreContext);
 

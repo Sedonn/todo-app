@@ -1,3 +1,5 @@
+/** @fileoverview User routes. */
+
 import { Router } from 'express';
 
 import { loginUser, registerUser } from '@/Controllers/user.ts';

@@ -1,3 +1,5 @@
+/** @fileoverview Wrapper for the {@link Modal} for controlling by a {@link React.Ref}. */
+
 import {
   PropsWithChildren,
   forwardRef,
@@ -12,6 +14,7 @@ export type ControllableDialogRefAttributes = {
   close: () => void;
 };
 
+/** Wrapper for the {@link Modal} for controlling by a {@link React.Ref}. */
 const ControllableDialog = forwardRef<
   ControllableDialogRefAttributes,
   PropsWithChildren<StrictModalProps>

@@ -1,3 +1,5 @@
+/** @fileoverview Controllers for the operations with tasks. */
+
 import type { NextFunction, Request, RequestHandler, Response } from 'express';
 
 import { AppDataSource } from '@/data-source.ts';

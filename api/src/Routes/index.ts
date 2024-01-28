@@ -1,3 +1,5 @@
+/** @fileoverview The main router. */
+
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 
 import { Router } from 'express';

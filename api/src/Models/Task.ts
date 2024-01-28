@@ -1,3 +1,5 @@
+/** @fileoverview Configuration of the 'task' table. */
+
 /* eslint-disable @typescript-eslint/indent */
 
 import {

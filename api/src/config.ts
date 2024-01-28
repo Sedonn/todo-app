@@ -1,3 +1,5 @@
+/** @fileoverview Variables from {@link process.env} with casting to certain types. */
+
 import yn from 'yn';
 
 export const {

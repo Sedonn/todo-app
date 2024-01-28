@@ -1,3 +1,5 @@
+/** @fileoverview Setting up the app authorization. */
+
 import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
 
 import { AppDataSource } from '@/data-source.ts';

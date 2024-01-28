@@ -1,3 +1,5 @@
+/** @fileoverview Configuration of the 'user' table. */
+
 /* eslint-disable @typescript-eslint/indent */
 
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn, type Relation } from 'typeorm';

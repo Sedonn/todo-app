@@ -1,4 +1,4 @@
-/** @fileoverview Task operation options. */
+/** @fileoverview Menu with task operations. */
 
 import { useState } from 'react';
 
@@ -16,6 +16,7 @@ type TTaskListMenuProps = {
   onSortByDate: TSortButtonProps<TTaskSortableKeys>['onSortChanged'];
 };
 
+/** Menu with task operations. */
 const TaskListMenu = ({
   onCreateTask,
   onFilterByStatusType,

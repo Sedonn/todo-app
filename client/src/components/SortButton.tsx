@@ -1,3 +1,5 @@
+/** @fileoverview Button with three modes of sorting {@link TSortType} by certain object field. */
+
 import { useMemo, useState } from 'react';
 
 import { Button, Icon, SemanticICONS } from 'semantic-ui-react';
@@ -14,6 +16,7 @@ export type TSortButtonProps<T> = {
   onSortChanged: (sortKey: T, sort: TSortType) => void;
 };
 
+/** Button with three modes of sorting {@link TSortType} by certain object field. */
 const SortButton = <T extends keyof Record<string, unknown>>({
   title,
   sortKey,
