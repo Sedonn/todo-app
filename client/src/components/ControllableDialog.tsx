@@ -34,4 +34,6 @@ const ControllableDialog = forwardRef<
   );
 });
 
+ControllableDialog.displayName = 'ControllableDialog';
+
 export default ControllableDialog;

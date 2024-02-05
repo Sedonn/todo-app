@@ -154,4 +154,6 @@ const TaskEditDialog = forwardRef<
   );
 });
 
+TaskEditDialog.displayName = 'TaskEditDialog';
+
 export default TaskEditDialog;
