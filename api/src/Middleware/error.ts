@@ -15,10 +15,10 @@ export const globalErrorHandler: ErrorRequestHandler = async (
   next: NextFunction,
 ) => {
   if (error instanceof APIError) {
-    return res.status(error.httpCode).json({ error: error.message });
+    return res.status(error.httpCode).json({ error: error.errorCode });
   }
 
   console.error(error);
 
-  return res.status(500).json({ error: 'Неизвестная ошибка' });
+  return res.status(500).json({ error: 'UNKNOWN_ERROR' });
 };

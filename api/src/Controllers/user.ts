@@ -30,7 +30,7 @@ export const registerUser: RequestHandler = async (
   const { login, password } = body;
 
   if (await userRepository.findOneBy({ login })) {
-    return next(new APIError(400, 'Такой пользователь уже существует'));
+    return next(new APIError(400, 'DUPLICATE_LOGIN'));
   }
 
   const user = userRepository.create({
@@ -43,7 +43,7 @@ export const registerUser: RequestHandler = async (
 
     return res.status(200).end();
   } catch (error) {
-    return next(new APIError(500, 'Ошибка регистрации пользователя'));
+    return next(new APIError(500, 'REGISTER_FAILED'));
   }
 };
 
@@ -64,7 +64,7 @@ export const loginUser: RequestHandler = async (
 
   const user = await userRepository.findOneBy({ login });
   if (!user || !(await bcrypt.compare(password, user.password))) {
-    return next(new APIError(401, 'Ошибка авторизации пользователя, проверьте введенный логин или пароль'));
+    return next(new APIError(401, 'AUTHORIZATION_FAILED'));
   }
 
   const payload = { id: user.id };

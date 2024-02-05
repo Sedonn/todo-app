@@ -26,7 +26,7 @@ export const getTasks: RequestHandler = async (
 
     return res.json(tasks);
   } catch (error) {
-    return next(new APIError(500, 'Ошибка получения списка задач', error));
+    return next(new APIError(500, 'TASK_GET_FAILED', error));
   }
 };
 
@@ -58,7 +58,7 @@ export const createTask: RequestHandler = async (
 
     return res.json(task);
   } catch (error) {
-    return next(new APIError(500, 'Ошибка создания новой задачи', error));
+    return next(new APIError(500, 'TASK_CREATE_FAILED', error));
   }
 };
 
@@ -82,7 +82,7 @@ export const updateTask: RequestHandler = async (
 
   const task = await taskRepository.findOne({ where: { id, user: { id: user!.id } } });
   if (!task) {
-    return next(new APIError(500, 'Задача не существует'));
+    return next(new APIError(500, 'TASK_NOT_FOUND'));
   }
 
   try {
@@ -91,7 +91,7 @@ export const updateTask: RequestHandler = async (
 
     return res.json(updatedTask);
   } catch (error) {
-    return next(new APIError(500, 'Ошибка обновления задачи', error));
+    return next(new APIError(500, 'TASK_UPDATE_FAILED', error));
   }
 };
 
@@ -115,7 +115,7 @@ export const deleteTask: RequestHandler = async (
 
   const task = await taskRepository.findOne({ where: { id, user: { id: user!.id } } });
   if (!task) {
-    return next(new APIError(500, 'Задача не существует'));
+    return next(new APIError(500, 'TASK_NOT_FOUND'));
   }
 
   try {
@@ -123,6 +123,6 @@ export const deleteTask: RequestHandler = async (
 
     return res.json(task);
   } catch (error) {
-    return next(new APIError(500, 'Ошибка удаления задачи', error));
+    return next(new APIError(500, 'TASK_DELETE_FAILED', error));
   }
 };

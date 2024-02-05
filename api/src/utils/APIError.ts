@@ -1,14 +1,20 @@
+import type { TAPIErrorCode } from '@/@types/error.js';
+
 export class APIError extends Error {
   /** Http error code. */
   public readonly httpCode: number;
 
+  /** Known error code of the app. */
+  public readonly errorCode: TAPIErrorCode;
+
   /** Instance of a error, if exists. */
   public readonly errorInstance?: unknown;
 
-  constructor(httpCode: number, message: string, errorInstance: unknown = undefined) {
-    super(message);
+  constructor(httpCode: number, errorCode: TAPIErrorCode, errorInstance: unknown = undefined) {
+    super(errorCode);
 
     this.httpCode = httpCode;
+    this.errorCode = errorCode;
     this.errorInstance = errorInstance;
   }
 }
