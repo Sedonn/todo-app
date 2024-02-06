@@ -1,6 +1,7 @@
 import { FormEvent, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { WithTranslation, withTranslation } from 'react-i18next';
 
 import {
   Container,
@@ -15,12 +16,13 @@ import {
 import ControllableDialog, {
   ControllableDialogRefAttributes,
 } from '@/components/ControllableDialog';
+import ChangeLanguageButton from '@/components/ChangeLanguageButton.tsx';
 
 import { registerUser } from '@/API/userAPI';
 import GenericFormData from '@/helpers/GenericFormData';
 import { showErrorMessage } from '@/helpers/error';
 
-const Register = () => {
+const Register = ({ t }: WithTranslation<'common' | 'validation'>) => {
   const navigate = useNavigate();
 
   const dialogRef = useRef<ControllableDialogRefAttributes>(null);
@@ -35,7 +37,7 @@ const Register = () => {
         ).toObject();
 
       if (password !== confirmedPassword) {
-        return toast.error('Пароли не совпадают');
+        return toast.error(t('rules.passwordsMismatch'));
       }
 
       await registerUser({ login, password });
@@ -54,7 +56,7 @@ const Register = () => {
     <>
       <ControllableDialog ref={dialogRef} onClose={onClose}>
         <ModalHeader className="!flex items-center justify-between">
-          Регистрация завершена!
+          {t('registerCompleteDialog.title')}
           <Icon
             className="cursor-pointer"
             name="close"
@@ -66,28 +68,39 @@ const Register = () => {
         <ModalContent className="!flex items-center">
           <Icon name="check" color="green" size="massive" />
           <Container text>
-            <Header>Аккаунт успешно создан!</Header>
-            <p>
-              После закрытия этого окна вы будете автоматически перенаправлены
-              на страницу авторизации.
-            </p>
+            <Header> {t('registerCompleteDialog.subtitle')}</Header>
+            <p>{t('registerCompleteDialog.description')}</p>
           </Container>
         </ModalContent>
       </ControllableDialog>
 
       <Segment className="!mt-40 w-96 h-fit">
-        <Header as="h2">Регистрация</Header>
+        <div className="flex items-center justify-between">
+          <Header className="!m-0" as="h2">
+            {t('registerPage.title')}
+          </Header>
+          <ChangeLanguageButton />
+        </div>
         <Form onSubmit={onSubmit}>
-          <Form.Input name="login" label="Логин" required />
-          <Form.Input type="password" name="password" label="Пароль" required />
+          <Form.Input
+            name="login"
+            label={t('registerPage.form.loginLabel')}
+            required
+          />
+          <Form.Input
+            type="password"
+            name="password"
+            label={t('registerPage.form.passwordLabel')}
+            required
+          />
           <Form.Input
             type="password"
             name="confirmedPassword"
-            label="Подтвердите пароль"
+            label={t('registerPage.form.confirmPasswordLabel')}
             required
           />
           <Form.Button fluid color="green" className="flex justify-center">
-            Зарегистрироваться
+            {t('registerPage.form.submitButtonLabel')}
           </Form.Button>
         </Form>
       </Segment>
@@ -95,4 +108,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default withTranslation(['common', 'validation'])(Register);

@@ -5,6 +5,8 @@ import { ToastContainer, Zoom, toast } from 'react-toastify';
 import router from '@/routes';
 import UserStore from '@/store/user';
 
+import './plugins/i18n.ts';
+
 // eslint-disable-next-line react-refresh/only-export-components
 export const userStore = new UserStore();
 

@@ -1,9 +1,8 @@
 /** @fileoverview Shows error messages from all places of the app. */
 
 import { AxiosError, AxiosResponse } from 'axios';
+import { t } from 'i18next';
 import { toast } from 'react-toastify';
-
-type ErrorResponse = { error: string };
 
 /**
  * Shows error messages from all places of the app.
@@ -15,16 +14,16 @@ export const showErrorMessage = (
   if (error instanceof AxiosError && error.response?.data.error) {
     const { data } = error.response as AxiosResponse<ErrorResponse>;
 
-    return toast.error(data.error);
+    return toast.error(t(`api:errors.${data.error}`));
   }
 
   console.error(error);
 
   if (error instanceof AxiosError) {
-    return toast.error('Неизвестная ошибка сети');
+    return toast.error(t('api:errors.UNKNOWN_NETWORK_ERROR'));
   }
 
   if (error instanceof Error) {
-    return toast.error('Неизвестная ошибка');
+    return toast.error(t('api:errors.UNKNOWN_ERROR'));
   }
 };

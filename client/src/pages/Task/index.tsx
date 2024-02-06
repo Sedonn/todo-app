@@ -1,6 +1,7 @@
 /** @fileoverview Manage of the user tasks. */
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { WithTranslation, withTranslation } from 'react-i18next';
 
 import { List, Message, Segment } from 'semantic-ui-react';
 
@@ -58,7 +59,7 @@ const showOnlyUncompletedTasks: TTaskFilterFunction = ({
 }: TTask) => !completeDate;
 
 /** Manage of the user tasks. */
-const Task = () => {
+const Task = ({ t }: WithTranslation) => {
   const taskEditDialog = useRef<TTaskEditDialogRefAttributes>(null);
 
   const [tasks, setTasks] = useState<TTask[]>([]);
@@ -137,7 +138,9 @@ const Task = () => {
               ))}
             </List>
           ) : (
-            <Message className="text-center">Список дел пуст</Message>
+            <Message className="text-center">
+              {t('taskPage.taskList.empty')}
+            </Message>
           )}
         </Segment>
       </Segment.Group>
@@ -145,4 +148,4 @@ const Task = () => {
   );
 };
 
-export default Task;
+export default withTranslation()(Task);

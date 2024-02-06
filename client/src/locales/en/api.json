@@ -1,0 +1,14 @@
+{
+  "errors": {
+    "TASK_NOT_FOUND": "Task not found",
+    "TASK_GET_FAILED": "Failed to get tasks.",
+    "TASK_CREATE_FAILED": "Task create error.",
+    "TASK_UPDATE_FAILED": "Task update error.",
+    "TASK_DELETE_FAILED": "Task delete error.",
+    "DUPLICATE_LOGIN": "Login is already exists.",
+    "REGISTER_FAILED": "Register failed.",
+    "AUTHORIZATION_FAILED": "Wrong login or password.",
+    "UNKNOWN_ERROR": "Unknown error.",
+    "UNKNOWN_NETWORK_ERROR": "Unknown network error."
+  }
+}

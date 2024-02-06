@@ -1,0 +1,61 @@
+{
+  "loginPage": {
+    "title": "Sign In",
+    "form": {
+      "loginLabel": "Login",
+      "passwordLabel": "Password",
+      "submitButtonLabel": "Sign In"
+    },
+    "registerMessage": {
+      "text": "Not have account?",
+      "link": "Create one"
+    }
+  },
+  "registerPage": {
+    "title": "Register",
+    "form": {
+      "loginLabel": "Login:",
+      "passwordLabel": "Password:",
+      "confirmPasswordLabel": "Confirm password:",
+      "submitButtonLabel": "Create account"
+    }
+  },
+  "registerCompleteDialog": {
+    "title": "Registration completed!",
+    "subtitle": "Account successfully created!",
+    "description": "After closing this message, you will be automatically redirected to login page."
+  },
+
+  "taskPage": {
+    "title": "Task list",
+    "menu": {
+      "sort": {
+        "createDate": "Create date",
+        "completeDate": "Complete date"
+      },
+      "filter": {
+        "onlyCompleted": "Completed",
+        "onlyUncompleted": "Uncompleted"
+      }
+    },
+    "taskList": {
+      "empty": "Todo list is empty, create something",
+      "card": {
+        "completed": "Done"
+      }
+    }
+  },
+  "taskEditDialog": {
+    "title": {
+      "create": "Create a task",
+      "update": "Update task"
+    },
+    "form": {
+      "submitButtonLabel": "Save"
+    },
+    "snackbar": {
+      "taskCreated": "The new task successfully created",
+      "taskUpdated": "Changes saved"
+    }
+  }
+}

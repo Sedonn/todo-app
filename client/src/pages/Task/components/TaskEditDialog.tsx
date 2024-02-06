@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react';
 import { toast } from 'react-toastify';
+import { WithTranslation, withTranslation } from 'react-i18next';
 
 import {
   Button,
@@ -30,7 +31,7 @@ import { TTask } from '@/@types/task';
 
 type TEditMode = 'create' | 'update';
 
-type TTaskEditDialogProps = {
+type TTaskEditDialogProps = WithTranslation & {
   /** Executes when task is successfully created. */
   onTaskCreated: (task: TTask) => void;
   /** Executes when task is successfully updated. */
@@ -52,7 +53,7 @@ export type TTaskEditDialogRefAttributes = {
 const TaskEditDialog = forwardRef<
   TTaskEditDialogRefAttributes,
   TTaskEditDialogProps
->(({ onTaskCreated, onTaskUpdated }, ref) => {
+>(({ t, onTaskCreated, onTaskUpdated }, ref) => {
   const dialogRef = useRef<ControllableDialogRefAttributes>(null);
 
   const [task, setTask] = useState<TTask | null>(null);
@@ -83,7 +84,7 @@ const TaskEditDialog = forwardRef<
       const createdTask = await createTask(taskContent);
 
       dialogRef.current?.close();
-      toast.success('Новая задача добавлена');
+      toast.success(t('taskEditDialog.snackbar.taskCreated'));
       onTaskCreated(createdTask);
     } catch (error) {
       showErrorMessage(error);
@@ -95,7 +96,7 @@ const TaskEditDialog = forwardRef<
       const updatedTask = await updateTask({ ...task!, content: taskContent });
 
       dialogRef.current?.close();
-      toast.success('Изменения сохранены');
+      toast.success(t('taskEditDialog.snackbar.taskUpdated'));
       onTaskUpdated(updatedTask);
     } catch (error) {
       showErrorMessage(error);
@@ -112,8 +113,8 @@ const TaskEditDialog = forwardRef<
   };
 
   const titleConfig = {
-    create: 'Создать новую задачу',
-    update: 'Обновить задачу',
+    create: t('taskEditDialog.title.create'),
+    update: t('taskEditDialog.title.update'),
   } satisfies Record<TEditMode, string>;
 
   return (
@@ -146,7 +147,7 @@ const TaskEditDialog = forwardRef<
           labelPosition="left"
           icon="checkmark"
           color="green"
-          content="Сохранить"
+          content={t('taskEditDialog.form.submitButtonLabel')}
           onClick={onSaveTask}
         />
       </ModalActions>
@@ -156,4 +157,4 @@ const TaskEditDialog = forwardRef<
 
 TaskEditDialog.displayName = 'TaskEditDialog';
 
-export default TaskEditDialog;
+export default withTranslation('common', { withRef: true })(TaskEditDialog);

@@ -1,6 +1,7 @@
 /** @fileoverview Menu with task operations. */
 
 import { useState } from 'react';
+import { WithTranslation, withTranslation } from 'react-i18next';
 
 import { Button, Icon } from 'semantic-ui-react';
 
@@ -10,7 +11,7 @@ import { TTaskSortableKeys } from '@/@types/task';
 
 export type TTaskStatusFilterType = 'completed' | 'uncompleted' | 'all';
 
-type TTaskListMenuProps = {
+type TTaskListMenuProps = WithTranslation & {
   onCreateTask: () => void;
   onFilterByStatusType: (filterType: TTaskStatusFilterType) => void;
   onSortByDate: TSortButtonProps<TTaskSortableKeys>['onSortChanged'];
@@ -18,6 +19,7 @@ type TTaskListMenuProps = {
 
 /** Menu with task operations. */
 const TaskListMenu = ({
+  t,
   onCreateTask,
   onFilterByStatusType,
   onSortByDate,
@@ -35,12 +37,12 @@ const TaskListMenu = ({
     <Button.Group className="flex-wrap">
       <Button onClick={onCreateTask} icon="add" color="green" />
       <SortButton<TTaskSortableKeys>
-        title="Дата создания"
+        title={t('taskPage.menu.sort.createDate')}
         sortKey="createDate"
         onSortChanged={onSortByDate}
       />
       <SortButton<TTaskSortableKeys>
-        title="Дата выполнения"
+        title={t('taskPage.menu.sort.completeDate')}
         sortKey="completeDate"
         onSortChanged={onSortByDate}
       />
@@ -50,7 +52,7 @@ const TaskListMenu = ({
         icon
       >
         <Icon className="!ml-1" name="filter" />
-        Выполненные
+        {t('taskPage.menu.filter.onlyCompleted')}
       </Button>
       <Button
         color={filterKey === 'uncompleted' ? 'blue' : undefined}
@@ -58,10 +60,10 @@ const TaskListMenu = ({
         icon
       >
         <Icon className="!ml-1" name="filter" />
-        Невыполненные
+        {t('taskPage.menu.filter.onlyUncompleted')}
       </Button>
     </Button.Group>
   );
 };
 
-export default TaskListMenu;
+export default withTranslation()(TaskListMenu);
