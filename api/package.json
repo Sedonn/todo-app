@@ -1,7 +1,7 @@
 {
   "name": "todo-app-backend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Backend part of Todo app",
   "main": "app.ts",
   "type": "module",

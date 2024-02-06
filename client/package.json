@@ -1,7 +1,7 @@
 {
   "name": "todo-app-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "Frontend part of Todo app",
   "scripts": {
