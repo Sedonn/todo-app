@@ -1,0 +1,5 @@
+{
+  "rules": {
+    "passwordsMismatch": "Пароли не совпадают."
+  }
+}

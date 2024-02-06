@@ -1,0 +1,61 @@
+{
+  "loginPage": {
+    "title": "Войти",
+    "form": {
+      "loginLabel": "Логин",
+      "passwordLabel": "Пароль",
+      "submitButtonLabel": "Войти"
+    },
+    "registerMessage": {
+      "text": "Нет аккаунта?",
+      "link": "Создать"
+    }
+  },
+  "registerPage": {
+    "title": "Регистрация",
+    "form": {
+      "loginLabel": "Логин:",
+      "passwordLabel": "Пароль:",
+      "confirmPasswordLabel": "Подтвердите пароль:",
+      "submitButtonLabel": "Создать аккаунт"
+    }
+  },
+  "registerCompleteDialog": {
+    "title": "Регистрация завершена!",
+    "subtitle": "Аккаунт успешно создан!",
+    "description": "После закрытия этого сообщения вы будете автоматически перемещены на страницу входа."
+  },
+
+  "taskPage": {
+    "title": "Список дел",
+    "menu": {
+      "sort": {
+        "createDate": "Дата создания",
+        "completeDate": "Дата выполнения"
+      },
+      "filter": {
+        "onlyCompleted": "Выполненные",
+        "onlyUncompleted": "Невыполненные"
+      }
+    },
+    "taskList": {
+      "empty": "Список дел пуст, добавьте что-нибудь",
+      "card": {
+        "completed": "Выполнено"
+      }
+    }
+  },
+  "taskEditDialog": {
+    "title": {
+      "create": "Создать новую задачу",
+      "update": "Обновить задачу"
+    },
+    "form": {
+      "submitButtonLabel": "Сохранить"
+    },
+    "snackbar": {
+      "taskCreated": "Новая задача добавлена",
+      "taskUpdated": "Изменения сохранены"
+    }
+  }
+}

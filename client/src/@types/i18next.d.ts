@@ -2,7 +2,7 @@
 
 import { CustomTypeOptions, InitOptions } from 'i18next';
 
-type TAvailableLocales = 'en';
+type TAvailableLanguages = 'en' | 'ru';
 
 type TAvailableNamespaces = 'common' | 'api' | 'validation';
 
@@ -13,10 +13,10 @@ type TResources = {
 };
 
 interface CustomInitOptions<T = object> extends InitOptions<T> {
-  resources: Record<TAvailableLocales, TResources>;
-  lng: TAvailableLocales;
-  fallbackLng: TAvailableLocales | FallbackLng;
-  supportedLngs: readonly TAvailableLocales[];
+  resources: Record<TAvailableLanguages, TResources>;
+  lng: TAvailableLanguages;
+  fallbackLng: TAvailableLanguages | FallbackLng;
+  supportedLngs: readonly TAvailableLanguages[];
   ns: readonly TAvailableNamespaces[];
   defaultNS: TAvailableNamespaces;
   fallbackNS: TAvailableNamespaces;

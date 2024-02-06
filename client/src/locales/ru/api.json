@@ -1,0 +1,14 @@
+{
+  "errors": {
+    "TASK_NOT_FOUND": "Задача не найдена",
+    "TASK_GET_FAILED": "Ошибка получения списка задач.",
+    "TASK_CREATE_FAILED": "Ошибка создания новой задачи.",
+    "TASK_UPDATE_FAILED": "Ошибка обновления задача.",
+    "TASK_DELETE_FAILED": "Ошибка удаления задачи.",
+    "DUPLICATE_LOGIN": "Такой логин уже существует.",
+    "REGISTER_FAILED": "Ошибка регистрации.",
+    "AUTHORIZATION_FAILED": "Неправильный логин или пароль.",
+    "UNKNOWN_ERROR": "Неизвестная ошибка.",
+    "UNKNOWN_NETWORK_ERROR": "Неизвестная ошибка сети."
+  }
+}

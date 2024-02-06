@@ -1,5 +1,6 @@
-import { MouseEvent } from 'react';
 import { WithTranslation, withTranslation } from 'react-i18next';
+
+import { MouseEvent } from 'react';
 
 import {
   Dropdown,
@@ -12,11 +13,12 @@ import {
   IconGroup,
 } from 'semantic-ui-react';
 
-import { TAvailableLocales } from '@/@types/i18next';
+import { TAvailableLanguages } from '@/@types/i18next';
 
 const FLAG_CONFIG = {
   en: 'gb',
-} satisfies Record<TAvailableLocales, FlagNameValues>;
+  ru: 'ru',
+} satisfies Record<TAvailableLanguages, FlagNameValues>;
 
 const ChangeLanguageButton = ({ i18n }: WithTranslation) => {
   const onChangeLanguage = (
@@ -24,7 +26,7 @@ const ChangeLanguageButton = ({ i18n }: WithTranslation) => {
     { text: newLanguage }: DropdownItemProps,
   ) => {
     if (newLanguage !== i18n.language) {
-      i18n.changeLanguage(newLanguage as TAvailableLocales);
+      i18n.changeLanguage(newLanguage as TAvailableLanguages);
     }
   };
 
@@ -34,7 +36,7 @@ const ChangeLanguageButton = ({ i18n }: WithTranslation) => {
         <IconGroup>
           <Icon name="world" size="large" />
           <Icon corner="bottom right" className="!mr-1">
-            <Flag name={FLAG_CONFIG[i18n.language as TAvailableLocales]} />
+            <Flag name={FLAG_CONFIG[i18n.language as TAvailableLanguages]} />
           </Icon>
         </IconGroup>
       }
@@ -43,11 +45,11 @@ const ChangeLanguageButton = ({ i18n }: WithTranslation) => {
       className="icon"
     >
       <DropdownMenu>
-        {i18n.languages.map((language: string) => (
+        {Object.keys(i18n.store.data).map((language: string) => (
           <DropdownItem
             key={language}
             className="!uppercase"
-            icon={<Flag name={FLAG_CONFIG[language as TAvailableLocales]} />}
+            icon={<Flag name={FLAG_CONFIG[language as TAvailableLanguages]} />}
             text={language}
             onClick={onChangeLanguage}
           />

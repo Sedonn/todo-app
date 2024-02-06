@@ -1,5 +1,7 @@
 /** @fileoverview Task card. */
 
+import { WithTranslation, withTranslation } from 'react-i18next';
+
 import { FormEvent } from 'react';
 
 import {
@@ -16,7 +18,7 @@ import { showErrorMessage } from '@/helpers/error';
 
 import { TTask } from '@/@types/task';
 
-type TTaskListItemProps = {
+type TTaskListItemProps = WithTranslation & {
   task: TTask;
   /** Executes on task update request. */
   onTaskEdit: (task: TTask) => void;
@@ -28,6 +30,7 @@ type TTaskListItemProps = {
 
 /** Task card. */
 const TaskListItem = ({
+  t,
   task,
   onTaskUpdated,
   onTaskEdit,
@@ -65,7 +68,11 @@ const TaskListItem = ({
           <List.Header className="!flex justify-between !text-base">
             {task.completeDate && (
               <>
-                <Label icon="check" color="green" content="Выполнено" />
+                <Label
+                  icon="check"
+                  color="green"
+                  content={t('taskPage.taskList.card.completed')}
+                />
 
                 <Label
                   icon="calendar check"
@@ -123,4 +130,4 @@ const TaskListItem = ({
   );
 };
 
-export default TaskListItem;
+export default withTranslation()(TaskListItem);
