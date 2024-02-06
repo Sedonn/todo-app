@@ -21,6 +21,13 @@ Frontend part docs is placed [here](https://github.com/Sedonn/todo-app/tree/mast
 
 Backend part docs is placed [here](https://github.com/Sedonn/todo-app/tree/master/api).
 
+## Localization
+
+The app uses the i18n library to provide localization. It supports these languages:
+
+- English
+- Russian
+
 ## Technologies
 
 - Node.js: 20.9.0
